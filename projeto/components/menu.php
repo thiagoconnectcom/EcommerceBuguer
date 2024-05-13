@@ -28,8 +28,8 @@
                     <li class="nav-item <?php if(basename($_SERVER['PHP_SELF']) == 'about.php') echo 'active'; ?>">
                         <a class="nav-link" href="about.php">Sobre nós</a>
                     </li>
-                    <li class="nav-item <?php if(basename($_SERVER['PHP_SELF']) == 'book.php') echo 'active'; ?>">
-                        <a class="nav-link" href="book.php">Fale Conosco</a>
+                    <li class="nav-item <?php if(basename($_SERVER['PHP_SELF']) == 'contactUs.php') echo 'active'; ?>">
+                        <a class="nav-link" href="contactUs.php">Fale Conosco</a>
                     </li>
                 </ul>
                 <div class="user_option">

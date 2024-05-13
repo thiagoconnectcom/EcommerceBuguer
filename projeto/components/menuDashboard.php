@@ -2,13 +2,18 @@
     <div class="sidebar-sticky">
         <ul class="nav flex-column">
             <li class="nav-item">
-                <a class="nav-link active" href="dashboard.php">
+                <a class="nav-link active" href="productsDashboard.php">
                     Produtos
                 </a>
             </li>
             <li class="nav-item">
                 <a class="nav-link active" href="contactUsDashboard.php">
                     Fale Conosco
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link active" href="usersDashboard.php">
+                    Usuários
                 </a>
             </li>
             <li class="nav-item">
