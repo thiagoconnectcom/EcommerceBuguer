@@ -35,5 +35,12 @@
     <link href="./css/style.css" rel="stylesheet" />
     <!-- responsive style -->
     <link href="./css/responsive.css" rel="stylesheet" />
+
+     <!-- jQery -->
+    <script src="js/jquery-3.4.1.min.js"></script>
+    <!-- bootstrap js -->
+    <script src="./js/bootstrap.js"></script>
+    <!-- custom js -->
+    <script src="./js/custom.js"></script>
   </head>
 
