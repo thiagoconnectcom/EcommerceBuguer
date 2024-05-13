@@ -1,9 +1,12 @@
 <?php
 
+  session_start();
+
   include('./services/conexao.php');
 
   // Variável para armazenar mensagens de erro
   $erro = "";
+  $success = "";
 
   if ($_SERVER["REQUEST_METHOD"] == "POST") {
       $nome = filter_input(INPUT_POST, 'nome', FILTER_SANITIZE_STRING);
@@ -18,11 +21,18 @@
       $stmt->bindParam(':descricao', $descricao, PDO::PARAM_STR);
 
       try {
-          // Executando a consulta preparada
-          $stmt->execute();
+        // Executando a consulta preparada
+        $stmt->execute();
+
+        // Definindo mensagem de sucesso
+        $_SESSION['success'] = "Mensagem enviada com sucesso!";
+        
+        // Redirecionando para evitar reenviar o formulário ao atualizar a página
+        header("Location: ".$_SERVER['REQUEST_URI']);
+        exit();
       } catch (PDOException $e) {
           // Capturando e tratando possíveis erros
-          die("Falha na execução do código SQL: " . $e->getMessage());
+          $_SESSION['erro'] ="Falha na execução do código SQL: " . $e->getMessage();
       }
   }
 ?>
@@ -75,6 +85,18 @@
                   <textarea required="" name="descricao" class="form-control" rows="3"></textarea>
                 </div>
             
+                <?php if (!empty($_SESSION['erro'])): ?>
+                  <div id="erro" class="alert alert-danger" role="alert">
+                    <?php echo $_SESSION['erro']; unset($_SESSION['erro']);?>
+                  </div>
+                <?php endif; ?>
+                
+                <?php if (!empty($_SESSION['success'])): ?>
+                  <div id="success" class="alert alert-success" role="success">
+                    <?php echo $_SESSION['success']; unset($_SESSION['success']); ?>
+                  </div>
+                <?php endif; ?>
+
                 <div class="btn_box">
                   <button type="submit">Enviar</button>
                 </div>
@@ -88,4 +110,26 @@
 
     <?php include './components/footer.php'; ?>
   </body>
+
+   <!-- Script para esconder a mensagem de erro após 3 segundos -->
+   <script>
+        // Função para esconder a mensagem de erro após 3 segundos
+        setTimeout(function() {
+            var erroDiv = document.getElementById('erro');
+            if (erroDiv) {
+                erroDiv.style.display = 'none';
+            }
+        }, 3000); // Tempo em milissegundos (3 segundos)
+    </script>
+
+     <!-- Script para esconder a mensagem de erro após 3 segundos -->
+     <script>
+        // Função para esconder a mensagem de erro após 3 segundos
+        setTimeout(function() {
+            var erroDiv = document.getElementById('success');
+            if (erroDiv) {
+                erroDiv.style.display = 'none';
+            }
+        }, 3000); // Tempo em milissegundos (3 segundos)
+    </script>
 </html>
