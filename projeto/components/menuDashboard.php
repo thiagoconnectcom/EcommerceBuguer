@@ -7,12 +7,7 @@
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link active" href="pedidos.php">
-                    Pedidos
-                </a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link active" href="fale-conosco.php">
+                <a class="nav-link active" href="contactUsDashboard.php">
                     Fale Conosco
                 </a>
             </li>

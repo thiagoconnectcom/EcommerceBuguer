@@ -120,11 +120,8 @@
                 erroDiv.style.display = 'none';
             }
         }, 3000); // Tempo em milissegundos (3 segundos)
-    </script>
 
-     <!-- Script para esconder a mensagem de erro após 3 segundos -->
-     <script>
-        // Função para esconder a mensagem de erro após 3 segundos
+        // Função para esconder a mensagem de success após 3 segundos
         setTimeout(function() {
             var erroDiv = document.getElementById('success');
             if (erroDiv) {

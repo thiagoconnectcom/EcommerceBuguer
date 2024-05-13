@@ -57,6 +57,9 @@
                                 <div class="form-group">
                                     <input id="password-field" type="password" name="senha" class="form-control" placeholder="Password" required="">
                                 </div>
+                                <div class="form-group">
+                                    <a href="register.php" class="text-warning">cadastre-se</a>
+                                </div>
                                 <?php if (!empty($erro)): ?>
                                     <div id="erro" class="alert alert-danger" role="alert">
                                         <?php echo $erro; ?>
