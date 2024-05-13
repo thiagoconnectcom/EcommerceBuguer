@@ -40,7 +40,7 @@
 
 <!DOCTYPE html>
 <html>
-  <?php include './components/header.php'; ?>
+  <?php include './components/head.php'; ?>
 
   <body class="sub_page">
     <div class="hero_area">
@@ -48,7 +48,7 @@
         <img src="images/hero-bg.jpg" alt="" />
       </div>
       <!-- header section strats -->
-      <?php include './components/menu.php'; ?>
+      <?php include './layouts/site/menu.php'; ?>
       <!-- end header section -->
     </div>
 

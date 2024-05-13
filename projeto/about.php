@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 
-<?php include './components/header.php'; ?>
+<?php include './components/head.php'; ?>
 
 <body class="sub_page">
 
@@ -11,7 +11,7 @@
     </div>
 
     <!-- header section strats -->
-    <?php include './components/menu.php'; ?>
+    <?php include './layouts/site/menu.php'; ?>
     <!-- end header section -->
   </div>
 

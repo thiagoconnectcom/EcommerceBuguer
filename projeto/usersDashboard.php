@@ -24,16 +24,17 @@
 
 <!DOCTYPE html>
 <html class="h-100">
-    <?php include './components/header.php'; ?>
+    <?php include './components/head.php'; ?>
+    
     <body>
         <?php
-            include('./components/headerDashboard.php');
+            include('./layouts/dashboard/header.php');
         ?>
 
         <div class="container-fluid">
             <div class="row">
                 <?php
-                    include('./components/menuDashboard.php');
+                    include('./layouts/dashboard/menu.php');
                 ?>
 
                 <main role="main" class="col-md-9 ml-sm-auto col-lg-10 pt-3 px-4">

@@ -37,7 +37,7 @@
 
 <!DOCTYPE html>
 <html class="h-100">
-    <?php include './components/header.php'; ?>
+    <?php include './components/head.php'; ?>
     
     <body class="h-100 login">
         <section class="h-100 d-flex align-items-center">

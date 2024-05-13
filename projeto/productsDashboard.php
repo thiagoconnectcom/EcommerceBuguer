@@ -1,6 +1,8 @@
 <?php
     include('./middleware/protect.php');
 
+    include('./services/conexao.php');
+
     // Variável para armazenar mensagens de erro
     $erro = "";
     $success = "";
@@ -19,63 +21,52 @@
 
         // Verificar se o arquivo é uma imagem
         $imagem_extensao = strtolower(pathinfo($imagem_nome, PATHINFO_EXTENSION));
-        $permitidas = array('jpg', 'jpeg', 'png', 'gif');
-        if (!in_array($imagem_extensao, $permitidas)) {
-            $_SESSION['erro'] = "Apenas arquivos de imagem JPG, JPEG, PNG ou GIF são permitidos.";
-            header("Location: ".$_SERVER['REQUEST_URI']);
-            exit();
-        }
-
+      
         // Gerar o caminho completo da imagem
-        $pathImg = $diretorio_imagens . $novoNomeDoArquivo . "." . $imagem_extensao;
+        $imagem = $diretorio_imagens . $novoNomeDoArquivo . "." . $imagem_extensao;
 
         // Movendo o arquivo de imagem para o diretório de upload
-        if (move_uploaded_file($imagem_tmp, $pathImg)) {
-            // Preparando a consulta SQL para inserir os dados na tabela de produtos
-            $sql = "INSERT INTO produtos (tipo, titulo, descricao, preco, imagem) VALUES (:tipo, :titulo, :descricao, :preco, :pathImg)";
+        if (move_uploaded_file($imagem_tmp, $imagem)) {
+            $sql = "INSERT INTO produtos (tipo, titulo, descricao, preco, imagem) VALUES (:tipo, :titulo, :descricao, :preco, :imagem)";
+            
             $stmt = $pdo->prepare($sql);
             $stmt->bindParam(':titulo', $titulo, PDO::PARAM_STR);
             $stmt->bindParam(':descricao', $descricao, PDO::PARAM_STR);
             $stmt->bindParam(':preco', $preco, PDO::PARAM_STR);
-            $stmt->bindParam(':pathImg', $pathImg, PDO::PARAM_STR);
+            $stmt->bindParam(':imagem', $imagem, PDO::PARAM_STR);
             $stmt->bindParam(':tipo', $tipo, PDO::PARAM_STR);
 
-            echo $stmt->debugDumpParams();
+            $stmt->execute();
+            
+            $_SESSION['success'] = "Produto criado com sucesso.";
 
-            try {
-                // Executando a consulta preparada
-                $stmt->execute();
-
-                // Definindo mensagem de sucesso
-                $_SESSION['success'] = "Produto cadastrado com sucesso!";
-                
-                // Redirecionando para evitar reenviar o formulário ao atualizar a página
-                header("Location: ".$_SERVER['REQUEST_URI']);
-                exit();
-            } catch (PDOException $e) {
-                // Capturando e tratando possíveis erros
-                $_SESSION['erro'] = "Falha na execução do código SQL: " . $e->getMessage();
-            }
+            // Redirecionando para evitar reenviar o formulário ao atualizar a página
+            header("Location: ".$_SERVER['REQUEST_URI']);
+            exit();
         } else {
             $_SESSION['erro'] = "Falha ao fazer o upload da imagem.";
         }
     }
+
+     // Exibir dados cadastrados
+    $sql_select = "SELECT * FROM produtos";
+    $stmt_select = $pdo->query($sql_select);
+    $products = $stmt_select->fetchAll(PDO::FETCH_ASSOC);
 ?>
-
-
 
 <!DOCTYPE html>
 <html class="h-100">
-    <?php include './components/header.php'; ?>
+    <?php include './components/head.php'; ?>
+    
     <body>
         <?php
-            include('./components/headerDashboard.php');
+            include('./layouts/dashboard/header.php');
         ?>
 
         <div class="container-fluid">
             <div class="row">
                 <?php
-                    include('./components/menuDashboard.php');
+                    include('./layouts/dashboard/menu.php');
                 ?>
 
                 <main role="main" class="col-md-9 ml-sm-auto col-lg-10 pt-3 px-4">
@@ -99,6 +90,33 @@
                         </div>
                     <?php endif; ?>
 
+                    <?php if (!empty($products)): ?>
+                    <div class="table-responsive">
+                        <table class="table-striped table">
+                            <tr>
+                                <th>Tipo</th>
+                                <th>Titulo</th>
+                                <th>Descrição</th>
+                                <th>Preço</th>
+                                <th>imagem</th>
+                            </tr>
+                            <?php foreach ($products as $data): ?>
+                                <tr>
+                                    <td><?php echo $data['tipo']; ?></td>
+                                    <td><?php echo $data['titulo']; ?></td>
+                                    <td><?php echo $data['descricao']; ?></td>
+                                    <td>R$ <?php echo number_format($data['preco'], 2, ',', '.'); ?></td>
+                                    <td>
+                                        <img src="<?php echo $data['imagem']; ?>" alt="<?php echo $data['titulo']; ?>" style="width: 100px;">
+                                    </td>
+                                </tr>
+                            <?php endforeach; ?>
+                        </table>
+                    </div>
+                    <?php else: ?>
+                        <p>Não há dados para exibir.</p>
+                    <?php endif; ?>
+
                     <!-- Modal -->
                     <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                         <div class="modal-dialog" role="document">
@@ -114,14 +132,17 @@
                                         <div>
                                             <select name="tipo" class="form-control nice-select wide mb-3">
                                                 <option value="" disabled selected></option>
-                                                <option value="Pizza">
+                                                <option value="pizza">
                                                     Pizza
                                                 </option>
-                                                <option value="Hambuguer">
+                                                <option value="burger">
                                                     Hambuguer
                                                 </option>
-                                                <option value="Porções">
-                                                    Porções
+                                                <option value="pasta">
+                                                    Massa
+                                                </option>
+                                                <option value="fries">
+                                                    Frios
                                                 </option>
                                             </select>
                                         </div>
@@ -138,7 +159,7 @@
                                 
                                         <div class="form-group">
                                             <label for="imagem">Imagem:</label>
-                                            <input type="file" name="imagem" class="form-control-file" id="imagem" accept="image/*" required>
+                                            <input type="file" name="imagem" class="form-control-file" accept="image/*" required>
                                         </div>
 
                                         <div class="form-group">
