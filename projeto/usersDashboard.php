@@ -26,12 +26,12 @@
 <html class="h-100">
     <?php include './components/head.php'; ?>
     
-    <body>
+    <body class=""h-100>
         <?php
             include('./layouts/dashboard/header.php');
         ?>
 
-        <div class="container-fluid">
+        <div class="container-fluid h-100">
             <div class="row">
                 <?php
                     include('./layouts/dashboard/menu.php');

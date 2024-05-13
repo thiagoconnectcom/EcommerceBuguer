@@ -67,7 +67,7 @@
                     required=""
                     type="text"
                     class="form-control"
-                    placeholder="Your Name"
+                    placeholder="Nome"
                     name="nome"
                   />
                 </div>
@@ -76,7 +76,7 @@
                     required=""
                     type="email"
                     class="form-control"
-                    placeholder="Your Email"
+                    placeholder="Email"
                     name="email"
                   />
                 </div>

@@ -173,10 +173,8 @@
                 </main>
             </div>
         </div>
-        <?php
-            include('./components/footer.php');
-        ?>
     </body>
+    
     <!-- Script para esconder a mensagem de erro após 3 segundos -->
     <script>
         // Função para esconder a mensagem de erro após 3 segundos

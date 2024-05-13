@@ -3,3 +3,4 @@
 
     <span class="text-warning"> Bem vindo ao Painel, <?php echo $_SESSION['nome']; ?>.</span>
 </nav>
+
