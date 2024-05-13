@@ -25,7 +25,6 @@
   </div>
 
   <!-- food section -->
-
   <section class="food_section layout_padding">
     <div class="container">
       <div class="heading_container heading_center">
@@ -38,7 +37,8 @@
         <li class="active" data-filter="*">All</li>
         <li data-filter=".burger">Burger</li>
         <li data-filter=".pizza">Pizza</li>
-        <li data-filter=".pasta">Porções</li>
+        <li data-filter=".fries">Fritas</li>
+        <li data-filter=".pasta">Massa</li>
       </ul>
 
       <div class="filters-content">
@@ -78,7 +78,6 @@
       </div>
     </div>
   </section>
-
   <!-- end food section -->
 
   <?php include './components/footer.php'; ?>
