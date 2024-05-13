@@ -63,7 +63,7 @@
                                     </div>
                                 <?php endif; ?>
                                 <div class="form-group">
-                                    <button type="submit" class="form-control btn btn-warning submit px-3">Sign In</button>
+                                    <button type="submit" class="form-control btn btn-warning submit px-3">Entrar</button>
                                 </div>
                             </form>
                         </div>
