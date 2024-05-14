@@ -1,10 +1,10 @@
 <?php
     // Configuração do banco de dados
-    $servidor = $_ENV["MYSQLHOST"];
-    $db = $_ENV["MYSQLDATABASE"];
-    $usuario = $_ENV["MYSQLUSER"];
-    $senha = $_ENV["MYSQLPASSWORD"];
-    $porta = $_ENV["MYSQLPORT"];
+    $servidor = "roundhouse.proxy.rlwy.net";
+    $db = "railway";
+    $usuario = "root";
+    $senha = "EaTPXTrsgvyOLhwvSLLCybxNSnJqvOlb";
+    $porta = "21342";
 
     // Tentar estabelecer a conexão PDO
     try {
