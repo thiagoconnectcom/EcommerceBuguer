@@ -1,9 +1,9 @@
 <?php
     // Configurações do banco de dados
-    $servidor = "localhost";
-    $db = "uninove";
+    $servidor = "roundhouse.proxy.rlwy.net";
+    $db = "railway";
     $usuario = "root";
-    $senha = "";
+    $senha = "EaTPXTrsgvyOLhwvSLLCybxNSnJqvOlb";
 
     // Tentar estabelecer a conexão PDO
     try {
