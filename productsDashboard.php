@@ -8,12 +8,12 @@
     $success = "";
 
     if ($_SERVER["REQUEST_METHOD"] == "POST") {
-        $titulo = filter_input(INPUT_POST, 'titulo', FILTER_SANITIZE_STRING);
-        $descricao = filter_input(INPUT_POST, 'descricao', FILTER_SANITIZE_STRING);
+        $titulo = filter_input(INPUT_POST, 'titulo', FILTER_SANITIZE_SPECIAL_CHARS);
+        $descricao = filter_input(INPUT_POST, 'descricao', FILTER_SANITIZE_SPECIAL_CHARS);
         $preco = filter_input(INPUT_POST, 'preco', FILTER_SANITIZE_NUMBER_FLOAT, FILTER_FLAG_ALLOW_FRACTION);
         $imagem_nome = $_FILES['imagem']['name'];
         $imagem_tmp = $_FILES['imagem']['tmp_name'];
-        $tipo = filter_input(INPUT_POST, 'tipo', FILTER_SANITIZE_STRING);
+        $tipo = filter_input(INPUT_POST, 'tipo', FILTER_SANITIZE_SPECIAL_CHARS);
         $novoNomeDoArquivo = uniqid();
 
         // Diretório para salvar as imagens dos produtos
