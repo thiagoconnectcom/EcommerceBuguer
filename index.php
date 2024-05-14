@@ -1,5 +1,3 @@
-<?php include('conexao.php'); ?>
-
 <!DOCTYPE html>
 <html>
   <?php include './components/head.php'; ?>

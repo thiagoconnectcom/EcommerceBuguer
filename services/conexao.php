@@ -12,6 +12,8 @@
         
         // Define o modo de erro do PDO para exceções
         $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+
+        $pdo->setAttribute(PDO::ATTR_TIMEOUT, 300); 
     } catch (PDOException $e) {
         // Em caso de falha na conexão, exibe uma mensagem de erro
         die("Falha na conexão: " . $e->getMessage());
