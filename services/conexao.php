@@ -1,14 +1,15 @@
 <?php
-    // Configurações do banco de dados
-    $servidor = "roundhouse.proxy.rlwy.net";
-    $db = "railway";
-    $usuario = "root";
-    $senha = "EaTPXTrsgvyOLhwvSLLCybxNSnJqvOlb";
+    // Configuração do banco de dados
+    $servidor = $_ENV["MYSQLHOST"];
+    $db = $_ENV["MYSQLDATABASE"];
+    $usuario = $_ENV["MYSQLUSER"];
+    $senha = $_ENV["MYSQLPASSWORD"];
+    $porta = $_ENV["MYSQLPORT"];
 
     // Tentar estabelecer a conexão PDO
     try {
         // Cria uma nova conexão PDO
-        $pdo = new PDO("mysql:host=$servidor;dbname=$db", $usuario, $senha);
+        $pdo = new PDO("mysql:host=$servidor;port=$porta;dbname=$db", $usuario, $senha);
         
         // Define o modo de erro do PDO para exceções
         $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
