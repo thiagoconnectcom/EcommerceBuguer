@@ -3,7 +3,7 @@
 
     include('./services/conexao.php');
 
-    include_once('./models/Produto.php');
+    include_once('./models/Product.php');
     
     include_once('./controllers/ProductController.php');
 

@@ -1,12 +1,12 @@
 <?php
-    class Registro {
+    class Register {
         private $pdo;
 
         public function __construct($pdo) {
             $this->pdo = $pdo;
         }
 
-        public function verificarUsuarioExistente($email) {
+        public function checkExistingUser($email) {
             $sql_verificar_email = "SELECT * FROM usuarios WHERE email = :email";
             $stmt_verificar_email = $this->pdo->prepare($sql_verificar_email);
             $stmt_verificar_email->bindParam(':email', $email, PDO::PARAM_STR);
@@ -16,9 +16,9 @@
             return ($quantidade_email > 0);
         }
 
-        public function cadastrarUsuario($nome, $email, $senha) {
+        public function registerUser($nome, $email, $senha) {
             // Verificar se o email já está em uso
-            $usuarioExistente = $this->verificarUsuarioExistente($email);
+            $usuarioExistente = $this->checkExistingUser($email);
 
             if ($usuarioExistente) {
                 return false; // Email já está em uso

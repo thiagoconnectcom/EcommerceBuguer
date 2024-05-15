@@ -2,8 +2,8 @@
     session_start();
 
     include('./services/conexao.php');
-    include_once('./models/Registro.php');
-    include_once('./controllers/RegistroController.php');
+    include_once('./models/Register.php');
+    include_once('./controllers/RegisterController.php');
 
     // Variável para armazenar mensagens de erro
     $erro = "";
@@ -13,13 +13,13 @@
         $email = filter_input(INPUT_POST, 'email', FILTER_SANITIZE_EMAIL);
         $senha = $_POST['senha'];
 
-        // Criando uma instância do controlador RegistroController
-        $registroController = new RegistroController(new Registro($pdo));
+        // Criando uma instância do controlador RegisterController
+        $registerController = new RegisterController(new Register($pdo));
 
         // Registrar usuário
-        $registroSucesso = $registroController->cadastrarUsuario($nome, $email, $senha);
+        $registerSucesso = $registerController->registerUser($nome, $email, $senha);
 
-        if ($registroSucesso) {
+        if ($registerSucesso) {
             header("Location: login.php");
             exit();
         } 

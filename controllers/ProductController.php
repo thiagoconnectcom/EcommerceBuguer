@@ -1,11 +1,11 @@
 <?php
 
-include_once('./models/Produto.php');
+include_once('./models/Product.php');
 
 class ProductController {
     private $productModel;
 
-    public function __construct(Produto $productModel) {
+    public function __construct(Product $productModel) {
         $this->productModel = $productModel;
     }
 

@@ -1,14 +1,14 @@
 <?php
-    class RegistroController {
+    class RegisterController {
         private $registroModel;
 
         public function __construct($registroModel) {
             $this->registroModel = $registroModel;
         }
 
-        public function cadastrarUsuario($nome, $email, $senha) {
+        public function registerUser($nome, $email, $senha) {
             // Verificar se o email já está em uso
-            $usuarioExistente = $this->registroModel->verificarUsuarioExistente($email);
+            $usuarioExistente = $this->registroModel->checkExistingUser($email);
 
             if ($usuarioExistente) {
                 $_SESSION['erro'] = "O email já está em uso. Por favor, tente outro.";
@@ -16,7 +16,7 @@
             }
 
             // Registrar usuário
-            $registroSucesso = $this->registroModel->cadastrarUsuario($nome, $email, $senha);
+            $registroSucesso = $this->registroModel->registerUser($nome, $email, $senha);
 
             if ($registroSucesso) {
                 return true; // Registro bem-sucedido
