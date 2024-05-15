@@ -10,7 +10,7 @@
     <title>Uninove</title>
 
     <!-- bootstrap core css -->
-    <link rel="stylesheet" type="text/css" href="./css/bootstrap.css" />
+    <link rel="stylesheet" type="text/css" href="../assets/css/bootstrap.css" />
 
     <!--owl slider stylesheet -->
     <link
@@ -26,11 +26,11 @@
       crossorigin="anonymous"
     />
     <!-- font awesome style -->
-    <link href="./assets/css/font-awesome.min.css" rel="stylesheet" />
+    <link href="../assets/css/font-awesome.min.css" rel="stylesheet" />
 
     <!-- Custom styles for this template -->
-    <link href="./assets/css/style.css" rel="stylesheet" />
+    <link href="../assets/css/style.css" rel="stylesheet" />
     <!-- responsive style -->
-    <link href="./assets/css/responsive.css" rel="stylesheet" />
+    <link href="../assets/css/responsive.css" rel="stylesheet" />
   </head>
 
