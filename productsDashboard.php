@@ -3,60 +3,26 @@
 
     include('./services/conexao.php');
 
-    // Variável para armazenar mensagens de erro
-    $erro = "";
-    $success = "";
+    include_once('./models/Produto.php');
+    
+    include_once('./controllers/ProdutoController.php');
 
+    // Criando uma instância do controlador ProdutoController
+    $produtoController = new ProdutoController(new Produto($pdo));
+
+    // Lógica para lidar com solicitações HTTP e chamar as funções apropriadas do controlador
     if ($_SERVER["REQUEST_METHOD"] == "POST") {
-        $titulo = filter_input(INPUT_POST, 'titulo', FILTER_SANITIZE_SPECIAL_CHARS);
-        $descricao = filter_input(INPUT_POST, 'descricao', FILTER_SANITIZE_SPECIAL_CHARS);
-        $preco = filter_input(INPUT_POST, 'preco', FILTER_SANITIZE_NUMBER_FLOAT, FILTER_FLAG_ALLOW_FRACTION);
-        $imagem_nome = $_FILES['imagem']['name'];
-        $imagem_tmp = $_FILES['imagem']['tmp_name'];
-        $tipo = filter_input(INPUT_POST, 'tipo', FILTER_SANITIZE_SPECIAL_CHARS);
-        $novoNomeDoArquivo = uniqid();
-
-        // Diretório para salvar as imagens dos produtos
-        $diretorio_imagens = "uploads/";
-
-        // Verificar se o arquivo é uma imagem
-        $imagem_extensao = strtolower(pathinfo($imagem_nome, PATHINFO_EXTENSION));
-      
-        // Gerar o caminho completo da imagem
-        $imagem = $diretorio_imagens . $novoNomeDoArquivo . "." . $imagem_extensao;
-
-        // Movendo o arquivo de imagem para o diretório de upload
-        if (move_uploaded_file($imagem_tmp, $imagem)) {
-            $sql = "INSERT INTO produtos (tipo, titulo, descricao, preco, imagem) VALUES (:tipo, :titulo, :descricao, :preco, :imagem)";
-            
-            $stmt = $pdo->prepare($sql);
-            $stmt->bindParam(':titulo', $titulo, PDO::PARAM_STR);
-            $stmt->bindParam(':descricao', $descricao, PDO::PARAM_STR);
-            $stmt->bindParam(':preco', $preco, PDO::PARAM_STR);
-            $stmt->bindParam(':imagem', $imagem, PDO::PARAM_STR);
-            $stmt->bindParam(':tipo', $tipo, PDO::PARAM_STR);
-
-            $stmt->execute();
-            
-            $_SESSION['success'] = "Produto criado com sucesso.";
-
-            // Redirecionando para evitar reenviar o formulário ao atualizar a página
-            header("Location: ".$_SERVER['REQUEST_URI']);
-            exit();
-        } else {
-            $_SESSION['erro'] = "Falha ao fazer o upload da imagem.";
-        }
+        // Lógica para cadastrar um novo produto
+        $produtoController->cadastrarProduto($_POST);
     }
 
-     // Exibir dados cadastrados
-    $sql_select = "SELECT * FROM produtos";
-    $stmt_select = $pdo->query($sql_select);
-    $products = $stmt_select->fetchAll(PDO::FETCH_ASSOC);
+    // Lógica para exibir todos os produtos
+    $products = $produtoController->exibirProdutos();
 ?>
 
 <!DOCTYPE html>
 <html class="h-100">
-    <?php include './components/head.php'; ?>
+    <?php include './includes/head.php'; ?>
     
     <body>
         <?php
@@ -98,7 +64,6 @@
                                 <th>Titulo</th>
                                 <th>Descrição</th>
                                 <th>Preço</th>
-                                <th>imagem</th>
                             </tr>
                             <?php foreach ($products as $data): ?>
                                 <tr>
@@ -106,9 +71,6 @@
                                     <td><?php echo $data['titulo']; ?></td>
                                     <td><?php echo $data['descricao']; ?></td>
                                     <td>R$ <?php echo number_format($data['preco'], 2, ',', '.'); ?></td>
-                                    <td>
-                                        <img src="<?php echo $data['imagem']; ?>" alt="<?php echo $data['titulo']; ?>" style="width: 100px;">
-                                    </td>
                                 </tr>
                             <?php endforeach; ?>
                         </table>
@@ -130,7 +92,7 @@
                                 <div class="modal-body">
                                     <form action="" class="signin-form" method="POST" enctype="multipart/form-data">
                                         <div>
-                                            <select name="tipo" class="form-control nice-select wide mb-3">
+                                            <select name="tipo" class="form-control nice-select wide mb-3" required="">
                                                 <option value="" disabled selected></option>
                                                 <option value="pizza">
                                                     Pizza
@@ -155,11 +117,6 @@
                                         </div>
                                         <div class="form-group">
                                             <input type="text" name="preco" class="form-control" placeholder="Preço" required="">
-                                        </div>
-                                
-                                        <div class="form-group">
-                                            <label for="imagem">Imagem:</label>
-                                            <input type="file" name="imagem" class="form-control-file" accept="image/*" required>
                                         </div>
 
                                         <div class="form-group">

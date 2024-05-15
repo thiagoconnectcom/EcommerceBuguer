@@ -40,7 +40,7 @@
 
 <!DOCTYPE html>
 <html>
-  <?php include './components/head.php'; ?>
+  <?php include './includes/head.php'; ?>
 
   <body class="sub_page">
     <div class="hero_area">
@@ -82,7 +82,7 @@
                 </div>
 
                 <div>
-                  <textarea required="" name="descricao" class="form-control" rows="3"></textarea>
+                  <textarea required="" name="descricao" class="form-control" rows="5" placeholder="Mensagem"></textarea>
                 </div>
             
                 <?php if (!empty($_SESSION['erro'])): ?>
@@ -108,7 +108,7 @@
     </section>
     <!-- end book section -->
 
-    <?php include './components/footer.php'; ?>
+    <?php include './includes/footer.php'; ?>
   </body>
 
    <!-- Script para esconder a mensagem de erro após 3 segundos -->

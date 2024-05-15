@@ -24,7 +24,7 @@
 
 <!DOCTYPE html>
 <html class="h-100">
-    <?php include './components/head.php'; ?>
+    <?php include './includes/head.php'; ?>
     
     <body class=""h-100>
         <?php

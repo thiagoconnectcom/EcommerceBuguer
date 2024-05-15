@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html>
-  <?php include './components/head.php'; ?>
+  <?php include './includes/head.php'; ?>
 
   <body>
     <div class="hero_area">
@@ -189,7 +189,7 @@
                   <p>São Paulo - SP</p>
                 </div>
                 <div class="img-box">
-                  <img src="images/client2.jpg" alt="" class="box-img" />
+                  <img src="./assets/images/client2.jpg" alt="" class="box-img" />
                 </div>
               </div>
             </div>
@@ -205,7 +205,7 @@
                   <p>São Paulo - SP</p>
                 </div>
                 <div class="img-box">
-                  <img src="images/client2.jpg" alt="" class="box-img" />
+                  <img src="./assets/images/client2.jpg" alt="" class="box-img" />
                 </div>
               </div>
             </div>
@@ -217,7 +217,7 @@
     <!-- end client section -->
 
     <!-- footer section -->
-    <?php include './components/footer.php'; ?>
+    <?php include './includes/footer.php'; ?>
     <!-- footer section -->
   </body>
 </html>

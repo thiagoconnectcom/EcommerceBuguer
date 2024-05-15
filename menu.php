@@ -11,7 +11,7 @@
 <!DOCTYPE html>
 <html>
 
-<?php include './components/head.php'; ?>
+<?php include './includes/head.php'; ?>
 
 <body class="sub_page">
 
@@ -80,6 +80,6 @@
   </section>
   <!-- end food section -->
 
-  <?php include './components/footer.php'; ?>
+  <?php include './includes/footer.php'; ?>
 </body>
 </html>
