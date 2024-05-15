@@ -1,56 +1,35 @@
 <?php
+    session_start();
 
-session_start();
+    include('./services/conexao.php');
+    include_once('./models/Registro.php');
+    include_once('./controllers/RegistroController.php');
 
-include('./services/conexao.php');
+    // Variável para armazenar mensagens de erro
+    $erro = "";
 
-// Variável para armazenar mensagens de erro
-$erro = "";
-$success = "";
+    if ($_SERVER["REQUEST_METHOD"] == "POST") {
+        $nome = filter_input(INPUT_POST, 'nome', FILTER_SANITIZE_SPECIAL_CHARS);
+        $email = filter_input(INPUT_POST, 'email', FILTER_SANITIZE_EMAIL);
+        $senha = $_POST['senha'];
 
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $nome = filter_input(INPUT_POST, 'nome', FILTER_SANITIZE_SPECIAL_CHARS);
-    $email = filter_input(INPUT_POST, 'email', FILTER_SANITIZE_EMAIL);
-    $senha = $_POST['senha'];
+        // Criando uma instância do controlador RegistroController
+        $registroController = new RegistroController(new Registro($pdo));
 
-    // Verifica se o email já está em uso
-    $sql_verificar_email = "SELECT * FROM usuarios WHERE email = :email";
-    $stmt_verificar_email = $pdo->prepare($sql_verificar_email);
-    $stmt_verificar_email->bindParam(':email', $email, PDO::PARAM_STR);
-    $stmt_verificar_email->execute();
-    $quantidade_email = $stmt_verificar_email->rowCount();
+        // Registrar usuário
+        $registroSucesso = $registroController->cadastrarUsuario($nome, $email, $senha);
 
-    if ($quantidade_email > 0) {
-        $_SESSION['erro'] = "O email já está em uso. Por favor, tente outro.";
-    } else {
-        // Preparando a consulta SQL para inserir os dados na tabela de usuários
-        $sql = "INSERT INTO usuarios (nome, email, senha) VALUES (:nome, :email, :senha)";
-        $stmt = $pdo->prepare($sql);
-        $stmt->bindParam(':nome', $nome, PDO::PARAM_STR);
-        $stmt->bindParam(':email', $email, PDO::PARAM_STR);
-        $stmt->bindParam(':senha', $senha, PDO::PARAM_STR);
-
-        try {
-            // Executando a consulta preparada
-            $stmt->execute();
-
-            // Definindo mensagem de sucesso
-            $_SESSION['success'] = "Registro realizado com sucesso!";
-            
-            // Redirecionando para evitar reenviar o formulário ao atualizar a página
+        if ($registroSucesso) {
             header("Location: login.php");
             exit();
-        } catch (PDOException $e) {
-            // Capturando e tratando possíveis erros
-            $_SESSION['erro'] = "Falha na execução do código SQL: " . $e->getMessage();
-        }
+        } 
     }
-}
-?>                     
+?>
+             
 
 <!DOCTYPE html>
 <html class="h-100">
-    <?php include './components/head.php'; ?>
+    <?php include './includes/head.php'; ?>
     
     <body class="h-100 login">
         <section class="h-100 d-flex align-items-center">
@@ -82,11 +61,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                                     </div>
                                 <?php endif; ?>
                                     
-                                <?php if (!empty($_SESSION['success'])): ?>
-                                    <div id="success" class="alert alert-success" role="success">
-                                        <?php echo $_SESSION['success']; unset($_SESSION['success']); ?>
-                                    </div>
-                                <?php endif; ?>
                                 <div class="form-group">
                                     <button type="submit" class="form-control btn btn-warning submit px-3">Entrar</button>
                                 </div>
@@ -102,14 +76,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         // Função para esconder a mensagem de erro após 3 segundos
         setTimeout(function() {
             var erroDiv = document.getElementById('erro');
-            if (erroDiv) {
-                erroDiv.style.display = 'none';
-            }
-        }, 3000); // Tempo em milissegundos (3 segundos)
-
-        // Função para esconder a mensagem de success após 3 segundos
-        setTimeout(function() {
-            var erroDiv = document.getElementById('success');
             if (erroDiv) {
                 erroDiv.style.display = 'none';
             }
