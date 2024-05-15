@@ -63,7 +63,7 @@
   <!-- footer section -->
   
   <!-- jQery -->
-  <script src="js/jquery-3.4.1.min.js"></script>
+  <script src="./assets/js/jquery-3.4.1.min.js"></script>
     <!-- popper js -->
     <script
         src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
@@ -71,7 +71,7 @@
         crossorigin="anonymous"
     ></script>
     <!-- bootstrap js -->
-    <script src="./js/bootstrap.js"></script>
+    <script src="./assets/js/bootstrap.js"></script>
     <!-- owl slider -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"></script>
     <!-- isotope js -->
@@ -79,4 +79,4 @@
     <!-- nice select -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-nice-select/1.1.0/js/jquery.nice-select.min.js"></script>
     <!-- custom js -->
-    <script src="./js/custom.js"></script>
+    <script src="./assets/js/custom.js"></script>

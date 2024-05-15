@@ -3,11 +3,6 @@
   <?php include './includes/head.php'; ?>
 
   <body>
-    <div class="hero_area">
-      <div class="bg-box">
-        <img src="./assets/images/hero-bg.jpg" alt="" />
-      </div>
-      
       <!-- header section strats -->
       <?php include './layouts/site/menu.php'; ?>
       <!-- end header section -->
@@ -190,7 +185,7 @@
                   <p>São Paulo - SP</p>
                 </div>
                 <div class="img-box">
-                  <img src="./assets/./assets/images/client2.jpg" alt="" class="box-img" />
+                  <img src="./assets/images/client2.jpg" alt="" class="box-img" />
                 </div>
               </div>
             </div>
@@ -206,7 +201,7 @@
                   <p>São Paulo - SP</p>
                 </div>
                 <div class="img-box">
-                  <img src="./assets/./assets/images/client2.jpg" alt="" class="box-img" />
+                  <img src="./assets/images/client2.jpg" alt="" class="box-img" />
                 </div>
               </div>
             </div>

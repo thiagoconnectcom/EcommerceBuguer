@@ -43,14 +43,9 @@
   <?php include './includes/head.php'; ?>
 
   <body class="sub_page">
-    <div class="hero_area">
-      <div class="bg-box">
-        <img src="images/hero-bg.jpg" alt="" />
-      </div>
-      <!-- header section strats -->
-      <?php include './layouts/site/menu.php'; ?>
-      <!-- end header section -->
-    </div>
+    <!-- header section strats -->
+    <?php include './layouts/site/menu.php'; ?>
+    <!-- end header section -->
 
     <!-- book section -->
     <section class="book_section layout_padding">

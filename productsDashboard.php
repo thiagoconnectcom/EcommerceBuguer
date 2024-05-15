@@ -5,19 +5,19 @@
 
     include_once('./models/Produto.php');
     
-    include_once('./controllers/ProdutoController.php');
+    include_once('./controllers/ProductController.php');
 
     // Criando uma instância do controlador ProdutoController
-    $produtoController = new ProdutoController(new Produto($pdo));
+    $productController = new ProductController(new Product($pdo));
 
     // Lógica para lidar com solicitações HTTP e chamar as funções apropriadas do controlador
     if ($_SERVER["REQUEST_METHOD"] == "POST") {
         // Lógica para cadastrar um novo produto
-        $produtoController->cadastrarProduto($_POST);
+        $productController->registerProduct($_POST);
     }
 
     // Lógica para exibir todos os produtos
-    $products = $produtoController->exibirProdutos();
+    $products = $productController->AllProducts();
 ?>
 
 <!DOCTYPE html>

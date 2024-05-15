@@ -14,15 +14,9 @@
 <?php include './includes/head.php'; ?>
 
 <body class="sub_page">
-
-  <div class="hero_area">
-    <div class="bg-box">
-      <img src="images/hero-bg.jpg" alt="">
-    </div>
-    <!-- header section strats -->
-    <?php include './layouts/site/menu.php'; ?>
-    <!-- end header section -->
-  </div>
+  <!-- header section strats -->
+  <?php include './layouts/site/menu.php'; ?>
+  <!-- end header section -->
 
   <!-- food section -->
   <section class="food_section layout_padding">
@@ -56,7 +50,7 @@
                 <div class="box">
                   <div>
                     <div class="img-box">
-                      <img src="<?php echo $produto['imagem']; ?>" alt="<?php echo $produto['titulo']; ?>">
+                      <img src="./assets/images/favicon.png">
                     </div>
                     <div class="detail-box">
                       <h5><?php echo $produto['titulo']; ?></h5>
