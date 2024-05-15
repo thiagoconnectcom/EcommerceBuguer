@@ -3,9 +3,9 @@
 
     include('./services/conexao.php');
 
-    include('./models/Product.php');
+    include_once('./models/Product.php');
     
-    include('./controllers/ProductController.php');
+    include_once('./controllers/ProductController.php');
 
     // Criando uma instância do controlador ProdutoController
     $productController = new ProductController(new Product($pdo));
@@ -14,6 +14,10 @@
     if ($_SERVER["REQUEST_METHOD"] == "POST") {
         // Lógica para cadastrar um novo produto
         $productController->registerProduct($_POST);
+
+        // Redirecionar após o envio do formulário para evitar reenvio ao atualizar
+        header("Location: ".$_SERVER['REQUEST_URI']);
+        exit();
     }
 
     // Lógica para exibir todos os produtos
@@ -70,7 +74,7 @@
                                         <td><?php echo $data['tipo']; ?></td>
                                         <td><?php echo $data['titulo']; ?></td>
                                         <td><?php echo $data['descricao']; ?></td>
-                                        <td>R$ <?php echo number_format($data['preco'], 2, ',', '.'); ?></td>
+                                        <td><?php echo $data['preco']; ?></td>
                                     </tr>
                                 <?php endforeach; ?>
                             </table>
@@ -116,7 +120,7 @@
                                             </textarea>
                                         </div>
                                         <div class="form-group">
-                                            <input type="text" name="preco" class="form-control" placeholder="Preço" required="">
+                                            <input type="text" name="preco" class="form-control" placeholder="Preço" required="" onkeyup="formatCurrency(this)">
                                         </div>
 
                                         <div class="form-group">
@@ -141,6 +145,18 @@
 
     <!-- Script para esconder a mensagem de erro após 3 segundos -->
     <script>
+        // Função para formatar o preço em tempo real enquanto o usuário digita
+        function formatCurrency(input) {
+            // Remove caracteres não numéricos
+            var valor = input.value.replace(/\D/g, '');
+            
+            // Formata o valor para o formato de moeda real
+            var valorFormatado = (parseFloat(valor) / 100).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
+
+            // Define o valor formatado de volta ao campo de preço
+            input.value = valorFormatado;
+        }
+
         // Função para esconder a mensagem de erro após 3 segundos
         setTimeout(function() {
             var erroDiv = document.getElementById('erro');

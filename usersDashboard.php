@@ -1,8 +1,8 @@
 <?php
     include('./middleware/protect.php');
     include('./services/conexao.php');
-    include('./models/User.php');
-    include('./controllers/UserController.php');
+    include_once('./models/User.php');
+    include_once('./controllers/UserController.php');
 
     // Criando uma instância do controlador UserController
     $userController = new UserController(new User($pdo));

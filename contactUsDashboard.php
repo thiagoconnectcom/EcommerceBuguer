@@ -1,8 +1,8 @@
 <?php
     include('./middleware/protect.php');
     include('./services/conexao.php');
-    include('./models/Contact.php');
-    include('./controllers/ContactController.php');
+    include_once('./models/Contact.php');
+    include_once('./controllers/ContactController.php');
 
     // Criando uma instância do controlador ContactController
     $contactController = new ContactController(new Contact($pdo));

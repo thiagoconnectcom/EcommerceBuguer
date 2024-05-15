@@ -43,11 +43,6 @@
         <div class="filters-content">
           <div class="row grid">
             <?php
-              // Função para formatar o preço como moeda brasileira (BRL)
-              function formatPrice($price) {
-                return 'R$ ' . number_format($price, 2, ',', '.');
-              }
-
               // Função para renderizar cada menus
               function renderProduct($menus) {
                 ?>
@@ -61,7 +56,7 @@
                         <h5><?php echo $menus['titulo']; ?></h5>
                         <p><?php echo $menus['descricao']; ?></p>
                         <div class="options">
-                          <h6><?php echo formatPrice($menus['preco']); ?></h6>
+                          <h6><?php echo $menus['preco']; ?></h6>
                         </div>
                       </div>
                     </div>

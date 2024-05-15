@@ -1,6 +1,6 @@
 <?php
 
-    include('./models/Product.php');
+    include_once('./models/Product.php');
 
     class ProductController {
         private $productModel;
