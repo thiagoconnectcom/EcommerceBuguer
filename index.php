@@ -5,8 +5,9 @@
   <body>
     <div class="hero_area">
       <div class="bg-box">
-        <img src="images/hero-bg.jpg" alt="" />
+        <img src="./assets/images/hero-bg.jpg" alt="" />
       </div>
+      
       <!-- header section strats -->
       <?php include './layouts/site/menu.php'; ?>
       <!-- end header section -->
@@ -103,7 +104,7 @@
             <div class="col-md-6">
               <div class="box">
                 <div class="img-box">
-                  <img src="images/o1.jpg" alt="" />
+                  <img src="./assets/images/o1.jpg" alt="" />
                 </div>
                 <div class="detail-box">
                   <h5>Tasty Thursdays</h5>
@@ -117,7 +118,7 @@
             <div class="col-md-6">
               <div class="box">
                 <div class="img-box">
-                  <img src="images/o2.jpg" alt="" />
+                  <img src="./assets/images/o2.jpg" alt="" />
                 </div>
                 <div class="detail-box">
                   <h5>Pizza Days</h5>
@@ -143,7 +144,7 @@
         <div class="row">
           <div class="col-md-6">
             <div class="img-box">
-              <img src="images/about-img.png" alt="" />
+              <img src="./assets/images/about-img.png" alt="" />
             </div>
           </div>
           <div class="col-md-6">
@@ -189,7 +190,7 @@
                   <p>São Paulo - SP</p>
                 </div>
                 <div class="img-box">
-                  <img src="./assets/images/client2.jpg" alt="" class="box-img" />
+                  <img src="./assets/./assets/images/client2.jpg" alt="" class="box-img" />
                 </div>
               </div>
             </div>
@@ -205,7 +206,7 @@
                   <p>São Paulo - SP</p>
                 </div>
                 <div class="img-box">
-                  <img src="./assets/images/client2.jpg" alt="" class="box-img" />
+                  <img src="./assets/./assets/images/client2.jpg" alt="" class="box-img" />
                 </div>
               </div>
             </div>
