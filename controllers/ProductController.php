@@ -9,8 +9,8 @@ class ProductController {
         $this->productModel = $productModel;
     }
 
-    public function registerProduct($dados) {
-        $this->productModel->insertProduct($dados['titulo'], $dados['descricao'], $dados['preco'], $dados['tipo']);
+    public function registerProduct($data) {
+        $this->productModel->insertProduct($data['titulo'], $data['descricao'], $data['preco'], $data['tipo']);
     }
 
     public function AllProducts() {

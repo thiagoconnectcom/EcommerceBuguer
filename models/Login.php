@@ -14,11 +14,11 @@
 
             try {
                 $stmt->execute();
-                $usuario = $stmt->fetch(PDO::FETCH_ASSOC);
-                $quantidade = $stmt->rowCount();
+                $user = $stmt->fetch(PDO::FETCH_ASSOC);
+                $qtd = $stmt->rowCount();
 
-                if ($quantidade == 1) {
-                    return $usuario;
+                if ($qtd == 1) {
+                    return $user;
                 } else {
                     return false;
                 }

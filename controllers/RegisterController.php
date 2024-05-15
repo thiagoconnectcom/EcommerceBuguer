@@ -1,24 +1,24 @@
 <?php
     class RegisterController {
-        private $registroModel;
+        private $registerModel;
 
-        public function __construct($registroModel) {
-            $this->registroModel = $registroModel;
+        public function __construct($registerModel) {
+            $this->registerModel = $registerModel;
         }
 
         public function registerUser($nome, $email, $senha) {
             // Verificar se o email já está em uso
-            $usuarioExistente = $this->registroModel->checkExistingUser($email);
+            $userExisting = $this->registerModel->checkExistingUser($email);
 
-            if ($usuarioExistente) {
+            if ($userExisting) {
                 $_SESSION['erro'] = "O email já está em uso. Por favor, tente outro.";
                 return false; // Email já está em uso
             }
 
             // Registrar usuário
-            $registroSucesso = $this->registroModel->registerUser($nome, $email, $senha);
+            $registerSuccess = $this->registerModel->registerUser($nome, $email, $senha);
 
-            if ($registroSucesso) {
+            if ($registerSuccess) {
                 return true; // Registro bem-sucedido
             } else {
                 $_SESSION['erro'] = "Falha ao registrar usuário. Por favor, tente novamente.";

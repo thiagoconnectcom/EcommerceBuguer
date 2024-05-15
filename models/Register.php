@@ -7,20 +7,20 @@
         }
 
         public function checkExistingUser($email) {
-            $sql_verificar_email = "SELECT * FROM usuarios WHERE email = :email";
-            $stmt_verificar_email = $this->pdo->prepare($sql_verificar_email);
-            $stmt_verificar_email->bindParam(':email', $email, PDO::PARAM_STR);
-            $stmt_verificar_email->execute();
-            $quantidade_email = $stmt_verificar_email->rowCount();
+            $sql_verify_email = "SELECT * FROM usuarios WHERE email = :email";
+            $stmt_verify_email = $this->pdo->prepare($sql_verify_email);
+            $stmt_verify_email->bindParam(':email', $email, PDO::PARAM_STR);
+            $stmt_verify_email->execute();
+            $quantidade_email = $stmt_verify_email->rowCount();
 
             return ($quantidade_email > 0);
         }
 
         public function registerUser($nome, $email, $senha) {
             // Verificar se o email já está em uso
-            $usuarioExistente = $this->checkExistingUser($email);
+            $userExisting = $this->checkExistingUser($email);
 
-            if ($usuarioExistente) {
+            if ($userExisting) {
                 return false; // Email já está em uso
             }
 
