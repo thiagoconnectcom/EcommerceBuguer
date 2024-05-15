@@ -3,9 +3,9 @@
 
     include('./services/conexao.php');
 
-    include_once('./models/Product.php');
+    include('./models/Product.php');
     
-    include_once('./controllers/ProductController.php');
+    include('./controllers/ProductController.php');
 
     // Criando uma instância do controlador ProdutoController
     $productController = new ProductController(new Product($pdo));

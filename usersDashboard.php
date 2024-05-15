@@ -1,26 +1,16 @@
 <?php
     include('./middleware/protect.php');
-
     include('./services/conexao.php');
+    include('./models/User.php');
+    include('./controllers/UserController.php');
 
-    // Variável para armazenar mensagens de erro
-    $erro = "";
+    // Criando uma instância do controlador UserController
+    $userController = new UserController(new User($pdo));
 
-    // Consulta SQL para selecionar todos os dados da tabela usuarios
-    $sql = "SELECT * FROM usuarios";
-    $stmt = $pdo->prepare($sql);
-
-    try {
-        // Executando a consulta preparada
-        $stmt->execute();
-
-        // Obtendo os resultados da consulta
-        $usuarios = $stmt->fetchAll(PDO::FETCH_ASSOC);
-    } catch (PDOException $e) {
-        // Capturando e tratando possíveis erros
-        $erro = "Falha na execução do código SQL: " . $e->getMessage();
-    }
+    // Obtendo todos os usuários
+    $users = $userController->getAllUsers();
 ?>
+
 
 <!DOCTYPE html>
 <html class="h-100">
@@ -42,14 +32,14 @@
                     <h1 class="h2">Usuários</h1>
                 </div>
 
-                <?php if (!empty($usuarios)): ?>
+                <?php if (!empty($users)): ?>
                     <div class="table-responsive">
                         <table class="table-striped table">
                             <tr>
                                 <th>Nome</th>
                                 <th>Email</th>
                             </tr>
-                            <?php foreach ($usuarios as $item): ?>
+                            <?php foreach ($users as $item): ?>
                                 <tr>
                                     <td><?php echo $item['nome']; ?></td>
                                     <td><?php echo $item['email']; ?></td>

@@ -1,25 +1,14 @@
 <?php
     include('./middleware/protect.php');
-
     include('./services/conexao.php');
+    include('./models/Contact.php');
+    include('./controllers/ContactController.php');
 
-    // Variável para armazenar mensagens de erro
-    $erro = "";
+    // Criando uma instância do controlador ContactController
+    $contactController = new ContactController(new Contact($pdo));
 
-    // Consulta SQL para selecionar todos os dados da tabela faleconosco
-    $sql = "SELECT * FROM faleconosco";
-    $stmt = $pdo->prepare($sql);
-
-    try {
-        // Executando a consulta preparada
-        $stmt->execute();
-
-        // Obtendo os resultados da consulta
-        $faleconosco = $stmt->fetchAll(PDO::FETCH_ASSOC);
-    } catch (PDOException $e) {
-        // Capturando e tratando possíveis erros
-        $erro = "Falha na execução do código SQL: " . $e->getMessage();
-    }
+    // Obtendo todos os contatos
+    $contactUs = $contactController->getAllContacts();
 ?>
 
 <!DOCTYPE html>
@@ -42,7 +31,7 @@
                     <h1 class="h2">Fale Conosco</h1>
                 </div>
 
-                <?php if (!empty($faleconosco)): ?>
+                <?php if (!empty($contactUs)): ?>
                     <div class="table-responsive">
                         <table class="table-striped table">
                             <tr>
@@ -50,7 +39,7 @@
                                 <th>Email</th>
                                 <th>Descrição</th>
                             </tr>
-                            <?php foreach ($faleconosco as $mensagem): ?>
+                            <?php foreach ($contactUs as $mensagem): ?>
                                 <tr>
                                     <td><?php echo $mensagem['nome']; ?></td>
                                     <td><?php echo $mensagem['email']; ?></td>
