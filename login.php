@@ -2,6 +2,8 @@
     session_start();
 
     include('./services/conexao.php');
+    include_once('./models/Login.php');
+    include_once('./controllers/LoginController.php');
 
     // Variável para armazenar mensagens de erro
     $erro = "";
@@ -10,30 +12,24 @@
         $email = filter_input(INPUT_POST, 'email', FILTER_SANITIZE_EMAIL);
         $senha = $_POST['senha'];
 
-        $sql = "SELECT * FROM usuarios WHERE email = :email AND senha = :senha";
-        $stmt = $pdo->prepare($sql);
-        $stmt->bindParam(':email', $email, PDO::PARAM_STR);
-        $stmt->bindParam(':senha', $senha, PDO::PARAM_STR);
+        // Criando uma instância do controlador LoginController
+        $loginController = new LoginController(new Login($pdo));
 
-        try {
-            $stmt->execute();
-            $usuario = $stmt->fetch(PDO::FETCH_ASSOC);
-            $quantidade = $stmt->rowCount();
+        // Autenticar usuário
+        $usuario = $loginController->authenticateUser($email, $senha);
 
-            if ($quantidade == 1) {
-                $_SESSION['id'] = $usuario['id'];
-                $_SESSION['nome'] = $usuario['nome'];
+        if ($usuario) {
+            $_SESSION['id'] = $usuario['id'];
+            $_SESSION['nome'] = $usuario['nome'];
 
-                header("Location: productsDashboard.php");
-                exit();
-            } else {
-                $erro = "Credenciais inválidas. Por favor, tente novamente.";
-            }
-        } catch (PDOException $e) {
-            die("Falha na execução do código SQL: " . $e->getMessage());
+            header("Location: productsDashboard.php");
+            exit();
+        } else {
+            $erro = "Credenciais inválidas. Por favor, tente novamente.";
         }
     }
 ?>
+
 
 <!DOCTYPE html>
 <html class="h-100">
