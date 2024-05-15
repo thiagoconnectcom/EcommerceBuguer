@@ -2,8 +2,8 @@
     session_start();
 
     include('./services/conexao.php');
-    include_once('./models/Register.php');
-    include_once('./controllers/RegisterController.php');
+    include('./models/Register.php');
+    include('./controllers/RegisterController.php');
 
     // Variável para armazenar mensagens de erro
     $erro = "";

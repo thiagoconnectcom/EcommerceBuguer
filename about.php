@@ -4,9 +4,11 @@
 <?php include './includes/head.php'; ?>
 
 <body class="sub_page">
-  <!-- header section strats -->
-  <?php include './layouts/site/menu.php'; ?>
-  <!-- end header section -->
+  <div class="hero_area">
+    <!-- header section strats -->
+    <?php include './layouts/site/menu.php'; ?>
+    <!-- end header section -->
+  </div>
 
   <!-- about section -->
   <section class="about_section layout_padding">

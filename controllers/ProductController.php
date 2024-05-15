@@ -1,20 +1,20 @@
 <?php
 
-include_once('./models/Product.php');
+    include('./models/Product.php');
 
-class ProductController {
-    private $productModel;
+    class ProductController {
+        private $productModel;
 
-    public function __construct(Product $productModel) {
-        $this->productModel = $productModel;
+        public function __construct(Product $productModel) {
+            $this->productModel = $productModel;
+        }
+
+        public function registerProduct($dados) {
+            $this->productModel->insertProduct($dados['titulo'], $dados['descricao'], $dados['preco'], $dados['tipo']);
+        }
+
+        public function AllProducts() {
+            return $this->productModel->selectProduct();
+        }
     }
-
-    public function registerProduct($data) {
-        $this->productModel->insertProduct($data['titulo'], $data['descricao'], $data['preco'], $data['tipo']);
-    }
-
-    public function AllProducts() {
-        return $this->productModel->selectProduct();
-    }
-}
 ?>

@@ -2,8 +2,8 @@
     session_start();
 
     include('./services/conexao.php');
-    include_once('./models/Login.php');
-    include_once('./controllers/LoginController.php');
+    include('./models/Login.php');
+    include('./controllers/LoginController.php');
 
     // Variável para armazenar mensagens de erro
     $erro = "";

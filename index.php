@@ -3,6 +3,7 @@
   <?php include './includes/head.php'; ?>
 
   <body>
+    <div class="hero_area">
       <!-- header section strats -->
       <?php include './layouts/site/menu.php'; ?>
       <!-- end header section -->

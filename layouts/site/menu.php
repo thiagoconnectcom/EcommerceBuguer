@@ -1,4 +1,3 @@
-<div class="hero_area">
     <div class="bg-box">
         <img src="./assets/images/hero-bg.jpg" alt="">
     </div>
@@ -44,4 +43,3 @@
             </nav>
         </div>
     </header>
-</div>

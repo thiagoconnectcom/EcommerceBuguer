@@ -1,52 +1,50 @@
 <?php
-
   session_start();
 
   include('./services/conexao.php');
+  include('./models/ContactForm.php');
+  include('./controllers/ContactFormController.php');
 
   // Variável para armazenar mensagens de erro
   $erro = "";
   $success = "";
 
+  // Criando uma instância do controlador ContactFormController
+  $contactFormController = new ContactFormController(new ContactForm($pdo));
+
+  // Lógica para lidar com solicitações HTTP e chamar as funções apropriadas do controlador
   if ($_SERVER["REQUEST_METHOD"] == "POST") {
       $nome = filter_input(INPUT_POST, 'nome', FILTER_SANITIZE_SPECIAL_CHARS);
       $email = filter_input(INPUT_POST, 'email', FILTER_SANITIZE_EMAIL);
       $descricao = $_POST['descricao'];
 
-      // Preparando a consulta SQL para inserir os dados na tabela faleconosco
-      $sql = "INSERT INTO faleconosco (nome, email, descricao) VALUES (:nome, :email, :descricao)";
-      $stmt = $pdo->prepare($sql);
-      $stmt->bindParam(':nome', $nome, PDO::PARAM_STR);
-      $stmt->bindParam(':email', $email, PDO::PARAM_STR);
-      $stmt->bindParam(':descricao', $descricao, PDO::PARAM_STR);
+      // Salvar contato
+      $saveSuccess = $contactFormController->saveContact($nome, $email, $descricao);
 
-      try {
-        // Executando a consulta preparada
-        $stmt->execute();
-
-        // Definindo mensagem de sucesso
-        $_SESSION['success'] = "Mensagem enviada com sucesso!";
-        
-        // Redirecionando para evitar reenviar o formulário ao atualizar a página
-        header("Location: ".$_SERVER['REQUEST_URI']);
-        exit();
-      } catch (PDOException $e) {
-          // Capturando e tratando possíveis erros
-          $_SESSION['erro'] ="Falha na execução do código SQL: " . $e->getMessage();
-      }
+      if ($saveSuccess) {
+          // Definindo mensagem de sucesso
+          $_SESSION['success'] = "Mensagem enviada com sucesso!";
+          
+          // Redirecionando para evitar reenviar o formulário ao atualizar a página
+          header("Location: ".$_SERVER['REQUEST_URI']);
+          exit();
+      } else {
+        $_SESSION['erro'] = "Não foi possível enviar mensagem, Tente novamente!";
+    }
   }
 ?>
-
 
 <!DOCTYPE html>
 <html>
   <?php include './includes/head.php'; ?>
 
   <body class="sub_page">
-    <!-- header section strats -->
-    <?php include './layouts/site/menu.php'; ?>
-    <!-- end header section -->
-
+    <div class="hero_area">
+      <!-- header section strats -->
+      <?php include './layouts/site/menu.php'; ?>
+      <!-- end header section -->
+    </div>
+    
     <!-- book section -->
     <section class="book_section layout_padding">
       <div class="container">
